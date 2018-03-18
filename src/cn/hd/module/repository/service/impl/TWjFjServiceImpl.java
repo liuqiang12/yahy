@@ -48,7 +48,7 @@ public class TWjFjServiceImpl extends BasicImplDao<TWjFjEntity> implements TWjFj
             T_xt_rz rz = new T_xt_rz();
             /** 日志记录信息* */
             /********** 根据业务不同设置相应的参数值 ***********/
-            rz.setNr("模块[xxxx],保存基本信息,基本信息内容:" + GsonUtil.object2Json(tWjFj));//操作详情
+            rz.setNr("");//操作详情
             rz.setMk_bz(ModuleEnum.orgModule);//模块[需要手动修改]
             rz.setSj_id(String.valueOf(ModuleEnum.orgModule.getVal()));//模块ID[需要手动修改]
             rz.setLx_bz(OpTypeEnum.add);//操作类型
@@ -81,7 +81,7 @@ public class TWjFjServiceImpl extends BasicImplDao<TWjFjEntity> implements TWjFj
             T_xt_rz rz = new T_xt_rz();
             /** 日志记录信息* */
             /********** 根据业务不同设置相应的参数值 ***********/
-            rz.setNr("模块[xxxx],保存基本信息,基本信息内容:" + GsonUtil.object2Json(tWjFj));//操作详情
+            rz.setNr("");//操作详情
             rz.setMk_bz(ModuleEnum.orgModule);//模块[需要手动修改]
             rz.setSj_id(String.valueOf(ModuleEnum.orgModule.getVal()));//模块ID[需要手动修改]
             rz.setLx_bz(OpTypeEnum.update);//操作类型
@@ -114,7 +114,7 @@ public class TWjFjServiceImpl extends BasicImplDao<TWjFjEntity> implements TWjFj
             T_xt_rz rz = new T_xt_rz();
             /** 日志记录信息* */
             /********** 根据业务不同设置相应的参数值 ***********/
-            rz.setNr("模块[xxxx],保存基本信息,基本信息内容:" + GsonUtil.object2Json(tWjFj));//操作详情
+            rz.setNr("");//操作详情
             rz.setMk_bz(ModuleEnum.orgModule);//模块[需要手动修改]
             rz.setSj_id(String.valueOf(ModuleEnum.orgModule.getVal()));//模块ID[需要手动修改]
             rz.setLx_bz(OpTypeEnum.delete);//操作类型
@@ -245,6 +245,16 @@ public class TWjFjServiceImpl extends BasicImplDao<TWjFjEntity> implements TWjFj
     }
 
     @Override
+    public TWjFjEntity findHyzcByHyId(String id) {
+        Map<String,Object> params = new HashMap<String,Object>();
+
+        params.put("relationalValue",id);
+        params.put("logicTablename","T_HY_HY");
+        params.put("ogicColumn","hyzc");
+
+        return tWjFjDao.getByHql("from TWjFjEntity tmp left join fetch tmp.wjWjEntity t where t.logicTablename = :logicTablename and t.relationalValue = :relationalValue and t.ogicColumn= :ogicColumn ",params);
+    }
+    @Override
     public TWjFjEntity findBsclByHyId(String id) {
         Map<String,Object> params = new HashMap<String,Object>();
 
@@ -264,5 +274,12 @@ public class TWjFjServiceImpl extends BasicImplDao<TWjFjEntity> implements TWjFj
         params.put("logicTablename","T_HY_HY");
         return tWjFjDao.find("from TWjFjEntity tmp left join fetch tmp.wjWjEntity t where t.logicTablename = :logicTablename and t.relationalValue = :relationalValue and (t.ogicColumn = 'tzyj' or t.ogicColumn = 'bscl' )",params);
     }
-
+    @Override
+    public List<TWjFjEntity> findFjAndZcByHyId(String id) {
+        Map<String,Object> params = new HashMap<String,Object>();
+        params.put("relationalValue",id);
+        params.put("logicTablename","T_HY_HY");
+        return tWjFjDao.find("from TWjFjEntity tmp left join fetch tmp.wjWjEntity t where t.logicTablename = :logicTablename and t.relationalValue = :relationalValue and (t.ogicColumn = 'tzyj' or t.ogicColumn = 'hyzc' )",params);
+    }
+    
 }

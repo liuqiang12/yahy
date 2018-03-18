@@ -27,14 +27,12 @@ import java.util.Set;
 @XmlRootElement(name = "TXtRyEntity")
 @XmlAccessorType(XmlAccessType.FIELD)
 /*@JsonIgnoreProperties(value={"hibernateLazyInitializer","handler","jsEntities"})*/
-@TypeDefs({@TypeDef(name = "genderEnum", typeClass = GenderEnum.class,
-        parameters = {@org.hibernate.annotations.Parameter(name = "class", value = "cn.hd.common.enumeration.GenderEnum")})
-})
+ 
 
 public class TXtRyEntity implements Serializable {
     private String id;//UUID
     private String xm;//姓名
-    private GenderEnum xb;//性别0男1女
+    private Integer xb;//性别0男1女
     private String zw;//职务
     private String bz;//备注
     private String lxfs;//联系方式
@@ -72,13 +70,12 @@ public class TXtRyEntity implements Serializable {
         this.xm = xm;
     }
 
-    @Column(name="XB")
-    @Type(type = "genderEnum")
-    public GenderEnum getXb() {
+    @Column(name="XB") 
+    public Integer getXb() {
         return xb;
     }
 
-    public void setXb(GenderEnum xb) {
+    public void setXb(Integer xb) {
         this.xb = xb;
     }
 

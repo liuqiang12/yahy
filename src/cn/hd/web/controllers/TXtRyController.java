@@ -50,9 +50,9 @@ public class TXtRyController extends BaseController {
         log.debug("。。。。。。。。。。。。。新增业务。。。。。。。。。。。。。");
         String xb_form = request.getParameter("xb_form");
         if("1".equals(xb_form)){
-            tXtRy.setXb(GenderEnum.female);
+            tXtRy.setXb(2);
         }else{
-            tXtRy.setXb(GenderEnum.male);
+            tXtRy.setXb(1);
         }
         tXtRy.setCjSj(new Date());
         if(tXtRy.getId() == null || "".equals(tXtRy.getId())){

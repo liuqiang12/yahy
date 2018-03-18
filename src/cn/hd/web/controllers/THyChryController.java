@@ -139,7 +139,7 @@ public class THyChryController extends BaseController {
             String zs = request.getParameter("zs");
 
             THyHyEntity hyHyEntity = hyHyService.findById(hy_id);
-            if("1".equals(sex)){tHyChry.setXb(GenderEnum.male);}else{tHyChry.setXb(GenderEnum.female);}
+            if("1".equals(sex)){tHyChry.setXb(1);}else{tHyChry.setXb(2);}
 
             if("0".equals(lb_int)){tHyChry.setLb(GenderCategoryEnum.Participant);tHyChry.setBz(null);}
             else if("1".equals(lb_int)){tHyChry.setLb(GenderCategoryEnum.Personnel);tHyChry.setBz(null);}
@@ -387,7 +387,7 @@ public class THyChryController extends BaseController {
             Iterator<THyChryEntity> it = chRyEntities.iterator();
             while(it.hasNext()){
                 THyChryEntity chryEntityTmp = it.next();
-                if(chryEntityTmp.getXb().getVal() == 1){
+                if(chryEntityTmp.getXb() == 1){
                     chryEntityTmp.setXbstr("男");
                 }else{
                     chryEntityTmp.setXbstr("女");

@@ -4,6 +4,7 @@ import cn.hd.entity.TWjWjEntity;
 import cn.hd.utils.ResponseJSON;
 
 import javax.servlet.http.HttpServletResponse;
+
 import java.util.List;
 import java.util.Map;
 
@@ -74,4 +75,6 @@ public interface TWjWjService {
      * @return
      */
     List<TWjWjEntity> findByJdxxId(String id);
+
+    void delLocalFile(HttpServletResponse response,TWjWjEntity wjEntity) throws Exception;
 }

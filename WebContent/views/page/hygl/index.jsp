@@ -57,7 +57,7 @@
                 <dd class="add"><a href="<%=request.getContextPath() %>/hyGlController/createHyModel" target="rightFrame" style="border:none;"><i></i>新建会议</a></dd>
             </dl>
             <dl class="log">
-                <dt class="fqhy"><a href="<%=request.getContextPath() %>/jdGlController/menuLink/log/12" target="rightFrame"><i></i>系统日志</a></dt>
+                <dt class="fqhy"><a href="<%=request.getContextPath() %>/hyGlController/logpage" target="rightFrame"><i></i>系统日志</a></dt>
             </dl>
         </div>
 

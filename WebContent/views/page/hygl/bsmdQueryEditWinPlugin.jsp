@@ -126,30 +126,78 @@
                 <td class="bt">通知原件</td>
                 <td colspan="3">
                     <!-- 通知原件 -->
-                    <span onclick="downFile('T_HY_HY','${tzyj_wjEntity.relationalValue}','tzyj')" title="${tzyj_fjEntity.mc}">${tzyj_fjEntity.nickMc}</span><!-- a标签，目的是可以下载附件 -->
-                    <input type="file" style="width:615px" name="tzyj" class="validate[required]">
+                    <span onclick="downFile('T_HY_HY','${tzyj_wjEntity.relationalValue}','tzyj')" title="${tzyj_fjEntity.mc}" id="tzyj_xxx_text">${tzyj_fjEntity.nickMc}</span><!-- a标签，目的是可以下载附件 -->
+                    <c:if test="${not empty tzyj_fjEntity.nickMc}">
+                        <span style="color: red"  onclick="deleteFile('T_HY_HY','${tzyj_wjEntity.relationalValue}','tzyj',this)">删除</span>
+                     </c:if>
+                     <input type="file" style="width:615px" name="tzyj" class="validate[required]">
                 </td>
             </tr>
-            <%--<tr>
-                <td class="bt">材料标题</td>
-                <td colspan="3"><input type="text" style="width:615px" value="${hyHyEntity.bsclBt}" name="bsclBt" class="validate[required]"></td>
-            </tr>
-            <tr>
-                <td class="bt">报送材料</td>
-                <td colspan="3">
-                    <span onclick="downFile('T_HY_HY','${bscl_wjEntity.relationalValue}','bscl')" title="${bscl_fjEntity.mc}">${bscl_fjEntity.nickMc}</span><!-- a标签，目的是可以下载附件 -->
-                    <input type="file" style="width:615px" name="bscl" class="validate[required]">
-                </td>
-            </tr>--%>
             <tr>
                 <td class="bt">会议座次</td>
-                <td colspan="3"><input type="text" style="width:615px" name="hyzc"><button class="button">浏览</button></td>
+                <td colspan="3">
+                	<span onclick="downFile('T_HY_HY','${hyzc_wjEntity.relationalValue}','hyzc')" title="${hyzc_fjEntity.mc}" id="hyzc_xxx_text">${hyzc_fjEntity.nickMc}</span><!-- a标签，目的是可以下载附件 -->
+                	<c:if test="${not empty hyzc_fjEntity.nickMc}">
+                        <span style="color: red"  onclick="deleteFile('T_HY_HY','${tzyj_wjEntity.relationalValue}','hyzc',this)">删除</span>
+                     </c:if>
+                    <input type="file" style="width:615px" name="hyzc" class="validate[required]">
+                </td>
             </tr>
         </table>
     </div>
 </div>
 </form>
 <script type="text/javascript">
+/* 删除附件 */
+function deleteFile(logicTablename,relationalValue,ogicColumn,obj){
+ 	/* ajax */
+ 	top.layer.confirm('你确定要删除附件吗?', {
+        btn: ['确定','取消'] //按钮
+    }, function(index, layero){
+        /*ajax*/
+        $.ajax({
+            //提交数据的类型 POST GET
+            type:"POST",
+            //提交的网址
+            url:contextPath+"/tWjWjController/delLocalFile",
+            //提交的数据
+            async:false,
+            data:{
+            	logicTablename:logicTablename,
+            	relationalValue:relationalValue,
+            	ogicColumn:ogicColumn
+            },
+            //返回数据的格式
+            datatype: "json",//"xml", "html", "script", "json", "jsonp", "text".
+            //在请求之前调用的函数
+            beforeSend:function(){
+            },
+            //成功返回之后调用的函数
+            success:function(data){
+                //console.log(data)
+                //提示删除成功
+                top.layer.msg(data.msg, {
+                    icon: 1,
+                    time: 3000 //3秒关闭（如果不配置，默认是3秒）
+                });
+                if(data.success){
+                	 $(obj).remove();
+                	 $("#"+ogicColumn+"_xxx_text").text('');
+                }
+            },
+            //调用执行后调用的函数
+            complete: function(XMLHttpRequest, textStatus){
+            },
+            //调用出错执行的函数
+            error: function(){
+                //请求出错处理
+            }
+        });
+    }, function(index, layero){
+        top.layer.close(index)
+    });
+}
+
     /*提交相关的数据到后台然后保存*/
     function jdFromSubmitFun(){
         var resJSON = {};

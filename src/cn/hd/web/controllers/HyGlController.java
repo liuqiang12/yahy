@@ -7,6 +7,7 @@ import cn.hd.entity.TWjFjEntity;
 import cn.hd.entity.TXtDwEntity;
 import cn.hd.entity.TXtRyEntity;
 import cn.hd.module.repository.service.*;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -64,6 +66,12 @@ public class HyGlController extends BaseController{
             e.printStackTrace();
         }
        return hyglPrefix+url;
+    }
+    
+    @RequestMapping("logpage")
+    public String logpage(HttpServletRequest request, org.springframework.ui.Model model){
+        /*  菜单链接:模块功能  */ 
+       return jdglPrefix+"log";
     }
 
     /**
@@ -120,10 +128,9 @@ public class HyGlController extends BaseController{
 
         TWjFjEntity wjFjEntityTmp = fjService.findBsclByHyId(hyHyInstEntity.getHyHyEntity().getId());
         model.addAttribute("wjFjEntityTmp",wjFjEntityTmp);
-
-
-
-
+        //会议座次
+        TWjFjEntity hyzcEntity = fjService.findHyzcByHyId(hyHyInstEntity.getHyHyEntity().getId());
+        model.addAttribute("hyzcEntity",hyzcEntity);
         return hyglPrefix+"page_fbhy/"+url;
     }
 

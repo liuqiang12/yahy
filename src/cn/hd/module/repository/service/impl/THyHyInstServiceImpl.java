@@ -50,7 +50,7 @@ public class THyHyInstServiceImpl extends BasicImplDao<THyHyInstEntity> implemen
             T_xt_rz rz = new T_xt_rz();
             /** 日志记录信息* */
             /********** 根据业务不同设置相应的参数值 ***********/
-            rz.setNr("模块[xxxx],保存基本信息,基本信息内容:" + GsonUtil.object2Json(tHyHyInst));//操作详情
+            rz.setNr("");//操作详情
             rz.setMk_bz(ModuleEnum.orgModule);//模块[需要手动修改]
             rz.setSj_id(String.valueOf(ModuleEnum.orgModule.getVal()));//模块ID[需要手动修改]
             rz.setLx_bz(OpTypeEnum.add);//操作类型
@@ -83,7 +83,7 @@ public class THyHyInstServiceImpl extends BasicImplDao<THyHyInstEntity> implemen
             T_xt_rz rz = new T_xt_rz();
             /** 日志记录信息* */
             /********** 根据业务不同设置相应的参数值 ***********/
-            rz.setNr("模块[xxxx],保存基本信息,基本信息内容:" + GsonUtil.object2Json(tHyHyInst));//操作详情
+            rz.setNr("");//操作详情
             rz.setMk_bz(ModuleEnum.orgModule);//模块[需要手动修改]
             rz.setSj_id(String.valueOf(ModuleEnum.orgModule.getVal()));//模块ID[需要手动修改]
             rz.setLx_bz(OpTypeEnum.update);//操作类型

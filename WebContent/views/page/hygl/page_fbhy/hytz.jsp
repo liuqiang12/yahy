@@ -118,7 +118,9 @@
             </tr>
             <tr>
                 <td class="bt">会议座次</td>
-                <td colspan="3"><a href="javascript:;">无</a></td>
+                <td colspan="3">
+                	<p class="cl_txt"><a href="javascript:void(0);"  onclick="downFile('T_HY_HY','${hyzcEntity.id}','hyzc')">${hyzcEntity.mc}</a></p>
+                </td>
             </tr>
         </table>
     </div>

@@ -57,7 +57,7 @@ public class TXtRyServiceImpl extends BasicImplDao<TXtRyEntity> implements TXtRy
             T_xt_rz rz = new T_xt_rz();
             /** 日志记录信息* */
             /********** 根据业务不同设置相应的参数值 ***********/
-            rz.setNr("模块[xxxx],保存基本信息,基本信息内容:" + GsonUtil.object2Json(tXtRy));//操作详情
+            rz.setNr("");//操作详情
             rz.setMk_bz(ModuleEnum.orgModule);//模块[需要手动修改]
             rz.setSj_id(String.valueOf(ModuleEnum.orgModule.getVal()));//模块ID[需要手动修改]
             rz.setLx_bz(OpTypeEnum.add);//操作类型
@@ -90,7 +90,7 @@ public class TXtRyServiceImpl extends BasicImplDao<TXtRyEntity> implements TXtRy
             T_xt_rz rz = new T_xt_rz();
             /** 日志记录信息* */
             /********** 根据业务不同设置相应的参数值 ***********/
-            rz.setNr("模块[xxxx],保存基本信息,基本信息内容:" + GsonUtil.object2Json(tXtRy));//操作详情
+            rz.setNr("");//操作详情
             rz.setMk_bz(ModuleEnum.orgModule);//模块[需要手动修改]
             rz.setSj_id(String.valueOf(ModuleEnum.orgModule.getVal()));//模块ID[需要手动修改]
             rz.setLx_bz(OpTypeEnum.update);//操作类型
@@ -123,7 +123,7 @@ public class TXtRyServiceImpl extends BasicImplDao<TXtRyEntity> implements TXtRy
             T_xt_rz rz = new T_xt_rz();
             /** 日志记录信息* */
             /********** 根据业务不同设置相应的参数值 ***********/
-            rz.setNr("模块[xxxx],保存基本信息,基本信息内容:" + GsonUtil.object2Json(tXtRy));//操作详情
+            rz.setNr("");//操作详情
             rz.setMk_bz(ModuleEnum.orgModule);//模块[需要手动修改]
             rz.setSj_id(String.valueOf(ModuleEnum.orgModule.getVal()));//模块ID[需要手动修改]
             rz.setLx_bz(OpTypeEnum.delete);//操作类型
@@ -308,7 +308,7 @@ public class TXtRyServiceImpl extends BasicImplDao<TXtRyEntity> implements TXtRy
 
         TXtRyEntity ryEntity = new TXtRyEntity();
         ryEntity.setXm("杨柳周");//角色
-        ryEntity.setXb(GenderEnum.male);
+        ryEntity.setXb(1);
         ryEntity.setZw("无");
         ryEntity.setLxfs("13438571235");
         ryEntity.setFpryStatus(0);
@@ -360,7 +360,7 @@ public class TXtRyServiceImpl extends BasicImplDao<TXtRyEntity> implements TXtRy
                 "";
                 TXtRyEntity fpryEntity = new TXtRyEntity();
                 fpryEntity.setXm(name);//角色
-                fpryEntity.setXb(GenderEnum.male);
+                fpryEntity.setXb(1);
                 fpryEntity.setZw("无");
                 fpryEntity.setLxfs("13438571235");
                 fpryEntity.setFpryStatus(1);

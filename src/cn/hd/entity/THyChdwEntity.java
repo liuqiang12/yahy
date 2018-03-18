@@ -49,7 +49,11 @@ import java.util.Set;
 })
 @JsonIgnoreProperties(value={"hibernateLazyInitializer","handler","hyEntities"})
 public class THyChdwEntity  implements Serializable {
-    private String id;//uuid
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private String id;//uuid
     private String dwId;//参会单位ID
     private SignEnum qsBz;//签收标志 签收标志；0：未签收；            1：已签收
     private Date qsSj;//签收时间

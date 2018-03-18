@@ -76,6 +76,7 @@ public interface TWjFjService {
      * @return
      */
     TWjFjEntity findBsclByHyId(String id);
+    TWjFjEntity findHyzcByHyId(String id);
 
     /**
      * 制定方案
@@ -91,5 +92,6 @@ public interface TWjFjService {
      * @return
      */
     public List<TWjFjEntity> findFjByHyId(String id);
+    public List<TWjFjEntity> findFjAndZcByHyId(String id);
 
 }

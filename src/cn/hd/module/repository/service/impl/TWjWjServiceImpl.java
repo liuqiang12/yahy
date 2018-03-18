@@ -1,16 +1,20 @@
 package cn.hd.module.repository.service.impl;
 
-import cn.hd.common.constant.DevContext;
-import cn.hd.common.enumeration.ModuleEnum;
-import cn.hd.common.enumeration.OpTypeEnum;
-import cn.hd.common.util.BasicImplDao;
-import cn.hd.entity.*;
-import cn.hd.module.repository.dao.TAttachConfigDao;
-import cn.hd.module.repository.dao.THyHyDao;
-import cn.hd.module.repository.dao.TWjWjDao;
-import cn.hd.module.repository.service.TWjWjService;
-import cn.hd.utils.GsonUtil;
-import cn.hd.utils.ResponseJSON;
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,10 +22,22 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.servlet.http.HttpServletResponse;
-
-import java.io.*;
-import java.util.*;
+import cn.hd.common.constant.DevContext;
+import cn.hd.common.enumeration.ModuleEnum;
+import cn.hd.common.enumeration.OpTypeEnum;
+import cn.hd.common.util.BasicImplDao;
+import cn.hd.entity.AttachConfigEntity;
+import cn.hd.entity.THyHyEntity;
+import cn.hd.entity.TWjWjEntity;
+import cn.hd.entity.TXtDwEntity;
+import cn.hd.entity.T_xt_rz;
+import cn.hd.module.repository.dao.TAttachConfigDao;
+import cn.hd.module.repository.dao.THyHyDao;
+import cn.hd.module.repository.dao.TWjFjDao;
+import cn.hd.module.repository.dao.TWjWjDao;
+import cn.hd.module.repository.service.TWjWjService;
+import cn.hd.utils.GsonUtil;
+import cn.hd.utils.ResponseJSON;
 
 /**
  * 动态生成   物理文件表
@@ -35,6 +51,11 @@ public class TWjWjServiceImpl extends BasicImplDao<TWjWjEntity> implements TWjWj
      **/
     @Autowired
     private TWjWjDao tWjWjDao;
+    
+    @Autowired
+    private TWjFjDao tWjFjDao;
+    
+    
     @Autowired
     private THyHyDao hyHyDao;
     @Autowired
@@ -55,7 +76,7 @@ public class TWjWjServiceImpl extends BasicImplDao<TWjWjEntity> implements TWjWj
             T_xt_rz rz = new T_xt_rz();
             /** 日志记录信息* */
             /********** 根据业务不同设置相应的参数值 ***********/
-            rz.setNr("模块[xxxx],保存基本信息,基本信息内容:" + GsonUtil.object2Json(tWjWj));//操作详情
+            rz.setNr("");//操作详情
             rz.setMk_bz(ModuleEnum.orgModule);//模块[需要手动修改]
             rz.setSj_id(String.valueOf(ModuleEnum.orgModule.getVal()));//模块ID[需要手动修改]
             rz.setLx_bz(OpTypeEnum.add);//操作类型
@@ -88,7 +109,7 @@ public class TWjWjServiceImpl extends BasicImplDao<TWjWjEntity> implements TWjWj
             T_xt_rz rz = new T_xt_rz();
             /** 日志记录信息* */
             /********** 根据业务不同设置相应的参数值 ***********/
-            rz.setNr("模块[xxxx],保存基本信息,基本信息内容:" + GsonUtil.object2Json(tWjWj));//操作详情
+            rz.setNr("");//操作详情
             rz.setMk_bz(ModuleEnum.orgModule);//模块[需要手动修改]
             rz.setSj_id(String.valueOf(ModuleEnum.orgModule.getVal()));//模块ID[需要手动修改]
             rz.setLx_bz(OpTypeEnum.update);//操作类型
@@ -121,7 +142,7 @@ public class TWjWjServiceImpl extends BasicImplDao<TWjWjEntity> implements TWjWj
             T_xt_rz rz = new T_xt_rz();
             /** 日志记录信息* */
             /********** 根据业务不同设置相应的参数值 ***********/
-            rz.setNr("模块[xxxx],保存基本信息,基本信息内容:" + GsonUtil.object2Json(tWjWj));//操作详情
+            rz.setNr("");//操作详情
             rz.setMk_bz(ModuleEnum.orgModule);//模块[需要手动修改]
             rz.setSj_id(String.valueOf(ModuleEnum.orgModule.getVal()));//模块ID[需要手动修改]
             rz.setLx_bz(OpTypeEnum.delete);//操作类型
@@ -374,6 +395,24 @@ public class TWjWjServiceImpl extends BasicImplDao<TWjWjEntity> implements TWjWj
                         e.printStackTrace();
                     }
                 }
+            }
+        }
+    }
+    @Override
+    public void delLocalFile(HttpServletResponse response, TWjWjEntity wjEntity) throws Exception {
+    	//还是需要删除旧的附件信息
+        Map<String,Object> deleteWjParams = new HashMap<String,Object>();
+        deleteWjParams.put("relationalValue",wjEntity.getRelationalValue());
+        //获取所有的数据然后先删除字表信息
+        List<TWjWjEntity> wjEntities = tWjWjDao.find("from TWjWjEntity t where t.logicTablename='"+wjEntity.getLogicTablename()+"' and t.relationalValue=:relationalValue and (t.ogicColumn='"+wjEntity.getOgicColumn()+"')",deleteWjParams);
+        if(wjEntities != null && !wjEntities.isEmpty()){
+            for(int i = 0 ;i < wjEntities.size(); i++){
+                TWjWjEntity wjWjEntity = wjEntities.get(i);
+                //先删除字表
+                Map<String,Object> fjParams = new HashMap<String,Object>();
+                fjParams.put("wjId",wjWjEntity.getId());
+                tWjFjDao.executeSql("delete from T_WJ_FJ t where t.wj_id=:wjId",fjParams);
+                tWjWjDao.executeSql("delete from T_WJ_WJ t where t.id=:wjId",fjParams);
             }
         }
     }

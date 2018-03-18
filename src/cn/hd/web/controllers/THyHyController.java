@@ -575,7 +575,7 @@ public class THyHyController extends BaseController {
         model.addAttribute("sbdwNames",sbdwNames);
         model.addAttribute("hyHyEntity",hyHyEntity);
         /*查询相关的附件信息：通知原件 和 报送材料 */
-        List<TWjFjEntity> fjEntities = fjService.findFjByHyId(hyHyInstEntity.getHyHyEntity().getId());
+        List<TWjFjEntity> fjEntities = fjService.findFjAndZcByHyId(hyHyInstEntity.getHyHyEntity().getId());
         if(fjEntities != null && !fjEntities.isEmpty()){
             for(int i = 0 ;i < fjEntities.size() ; i++){
                 TWjFjEntity fjEntity = fjEntities.get(i);
@@ -583,10 +583,10 @@ public class THyHyController extends BaseController {
                 if(wjEntity != null && wjEntity.getOgicColumn().equals("tzyj")){//通知原件
                     model.addAttribute("tzyj_fjEntity",fjEntity);
                     model.addAttribute("tzyj_wjEntity",wjEntity);
-                }/*else if(wjEntity != null && wjEntity.getOgicColumn().equals("bscl")){//报送材料
-                    model.addAttribute("bscl_fjEntity",fjEntity);
-                    model.addAttribute("bscl_wjEntity",wjEntity);
-                }*/
+                }else if(wjEntity != null && wjEntity.getOgicColumn().equals("hyzc")){//报送材料
+                    model.addAttribute("hyzc_fjEntity",fjEntity);
+                    model.addAttribute("hyzc_wjEntity",wjEntity);
+                }
             }
         }
         return hyglPrefix+"bsmdQueryEditWinPlugin";

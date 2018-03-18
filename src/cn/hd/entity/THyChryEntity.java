@@ -50,7 +50,7 @@ public class THyChryEntity  implements Serializable {
     private Integer lbZt;//人员类别0：参会人员；            1：工作人员；            2：驾驶人员；            3：会议请假
 
     private String xm;//姓名
-    private GenderEnum xb;//性别0男1女
+    private Integer xb;//性别0男1女
     private String zw;//职务
     private GenderCategoryEnum lb;//人员类别0：参会人员；            1：工作人员；            2：驾驶人员；            3：会议请假
     private String bz;//备注（如会议请假时的请假事由）
@@ -101,12 +101,11 @@ public class THyChryEntity  implements Serializable {
     }
 
     @Column(name="XB")
-    @Type(type = "genderEnum")
-    public GenderEnum getXb() {
+    public Integer getXb() {
         return xb;
     }
 
-    public void setXb(GenderEnum xb) {
+    public void setXb(Integer xb) {
         this.xb = xb;
     }
 
