@@ -1,0 +1,40 @@
+/*双向选择器*/
+.listerHover{
+	background-color:#e5daba;/*鼠标移入颜色*/
+	cursor:default;
+	margin-left:1px;
+}
+ul.lister li{
+	height:24px;
+	line-height:24px;
+}
+div.listerLinksLeft{
+	float:left;
+}
+
+div.listerLinksRight{
+	float:left;
+}
+.left,.right{
+	color:#a77a32;/*箭头颜色*/
+}
+ul.lister{
+	list-style:none;
+	text-align:left;
+	border:1px solid #d5be85;/*边框色*/
+	padding:10px;
+	margin:0;
+	overflow:auto;
+	margin-top:5px;
+	font-weight:normal;
+	display:block;
+	background-image: url(form/selListBg.jpg);
+	background-repeat: repeat-x;
+	background-position:0% 100%;
+	background-color:white;
+}
+.clear{
+	clear:both;
+	line-height:1px;
+}
+/*双向选择器*/

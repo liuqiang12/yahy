@@ -1,0 +1,11 @@
+package ${codeModel.daoPackage};
+
+import cn.hd.common.util.BasicDao;
+import ${codeModel.entityPackage}.${codeModel.className};
+
+/**
+* [$!{codeModel.tableComment} 独立持久层方法]
+*/
+public interface ${codeModel.className}Dao extends BasicDao<${codeModel.className}>{
+
+}

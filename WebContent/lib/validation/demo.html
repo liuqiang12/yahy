@@ -1,0 +1,291 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="reset.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../jquery-1.4.js"></script>
+<!--表单验证(分离版)start-->
+<link href="skins/validateStyle.css" rel="stylesheet" type="text/css"/>
+<script src="js/validationEngine-cn.js" type="text/javascript"></script>
+<script src="js/validationEngine.js" type="text/javascript"></script>
+<!--表单验证(分离版)end-->
+
+<!--自定义验证函数start-->
+<script>
+	function customFunc1(){
+		if($("#cusInput").val()=="123"){
+			return false;
+		}else{
+			return true;
+		}
+	}
+</script>
+<!--自定义验证函数end-->
+<body>
+	<div class="box2" panelWidth="800" panelTitle="验证效果">
+		<form method="post" action="chapter5-3-6-content1.html">
+	<table class="tableStyle" formMode="true">
+		<tr>
+			<th colspan="2">表单填写</th>
+		</tr>
+		<tr>
+			<td>用户名：</td><td><input type="text" class=" validate[required,custom[noSpecialCaracters]]"/><span class="star">*</span></td>
+		</tr>
+		<tr>
+			<td>密码：</td><td><input type="password" id="pwd" class="validate[required,length[6,11],custom[noSpecialCaracters]]"/><span class="star">*</span></td>
+		</tr>
+		<tr>
+			<td>密码确认：</td><td><input type="password" class="validate[required,confirm[pwd]]"/><span class="star">*</span></td>
+		</tr>
+		<tr>
+			<td>电子邮件：</td><td><input type="text" class=" validate[required,custom[email]]"/><span class="star">*</span></td>
+		</tr>
+		
+		<tr>
+			<td>姓名：</td><td><input type="text" class="validate[required,custom[chinese],length[0,20]]"/><span class="star">*</span></td>
+		</tr>
+		<tr>
+			<td>性别：</td>
+			<td><div style="width:120px;"><label for="radio-1">男</label><input type="radio" class="validate[required] radio" id="radio-1" name="ra" value="radio-1" />
+				<label for="radio-2">女</label><input type="radio" id="radio-2" name="ra" class="validate[required] radio" value="radio-2"/> <span class="star">*</span></div>
+			</td>
+		</tr>
+		<tr>
+			<td>年龄：</td><td><input type="text" class=" validate[required,custom[onlyNumber],length[0,3]]"/><span class="star">*</span></td>
+		</tr>
+		<tr>
+			<td>籍贯：</td>
+			<td>
+				<select colNum="3" class="validate[required]">
+				  	<option value="">请选择籍贯</option>
+				    <option>北京市</option>
+				    <option>天津市</option>
+				    <option>河北省</option>
+				    <option>山西省</option>
+				    <option>内蒙古自治区</option>
+				    <option>辽宁省</option>
+				    <option>吉林省</option>
+				    <option>黑龙江省</option>
+				    <option>上海市</option>
+				    <option>江苏省</option>
+				    <option>浙江省</option>
+				    <option>安徽省</option>
+				    <option>福建省</option>
+				    <option>江西省</option>
+				    <option>山东省</option>
+				    <option>湖南省</option>
+				    <option>湖北省</option>
+				    <option>河南省</option>
+				    <option>广东省</option>
+				    <option>广西壮族自治区</option>
+				    <option>海南省</option>
+				    <option>重庆市</option>
+				    <option>四川省</option>
+				    <option>贵州省</option>
+				    <option>云南省</option>
+				    <option>西藏自治区</option>
+				    <option>陕西省</option>
+				    <option>甘肃省</option>
+				    <option>青海省</option>
+				    <option>宁夏回族自治区</option>
+				    <option>新疆维吾尔自治区</option>
+				    <option>香港特别行政区</option>
+				    <option>澳门特别行政区</option>
+				    <option>台湾省</option>
+				    <option>其他</option>
+				 </select>
+				 <span class="star">*</span>
+			</td>
+		</tr>
+		<tr>
+			<td>曾用名：</td><td><input type="text"/></td>
+		</tr>
+		<tr>
+			<td>英文名：</td><td><input type="text" class=" validate[required,custom[onlyLetter]]"/><span class="star">*</span></td>
+		</tr>
+		
+		<tr>
+			<td>出生日期：</td><td><input type="text" class="date validate[required,custom[date]]"/><span class="star">*</span></td>
+		</tr>
+		<tr>
+			<td>固定电话：</td><td><input type="text" class=" validate[required,custom[telephone]]"/><span class="star">*</span></td>
+		</tr>
+		<tr>
+			<td>手机号码：</td><td><input type="text" class=" validate[required,custom[mobilephone]]"/><span class="star">*</span></td>
+		</tr>
+		<tr>
+			<td>爱好：</td>
+			<td>
+				<div style="width:120px;"><label for="checkbox-1" >唱歌</label><input type="checkbox" id="checkbox-1" class="validate[minCheckbox[1]] checkbox" name="ck1" value="选项1"/>
+				<label for="checkbox-2">跳舞</label><input type="checkbox" id="checkbox-2" class="validate[minCheckbox[1]] checkbox" name="ck1" value="选项2" /> <span class="star">*</span></div>
+			</td>
+		</tr>
+		<tr>
+			<td>IP地址：</td><td><input type="text" class=" validate[required,custom[ip]]"/><span class="star">*</span></td>
+		</tr>
+		<tr>
+			<td>自定义验证：</td><td><input class="validate[required,funcCall[custom1]]" type="text" id="cusInput"/><span class="star">*</span></td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<input type="submit" value=" 提 交 "/>
+				<input type="reset" value=" 重 置 "/>
+			</td>
+		</tr>
+	</table>
+	</form>
+	</div>
+	<a  href="include/code.html" target="_blank">查看验证表单代码</a>
+	
+	<div class="box2" panelWidth="800" panelTitle="基本用法" roller="true">
+	要实现表单验证，首先引入验证脚本
+<textarea class="code">
+<script src="../js/form/validationEngine-cn.js" type="text/javascript"></script>
+<script src="../js/form/validationEngine.js" type="text/javascript"></script>
+</textarea>
+<pre></pre>		
+	然后对需要验证的表单元素加上class="validate[XXX]"，其中XXX是验证规则，例如required表示必填项，length[0,20]限制字符长度在20字以内。验证规则可写多个。代码如下：
+<textarea class="code">
+<input type="text" class="validate[required,custom[chinese],length[0,20]]"/>
+</textarea>
+<pre></pre>	
+	</div>
+
+	<div class="box2" panelWidth="800" panelTitle="注意事项" roller="true">
+	如果是radio类型的元素，在class中添加了验证规则后，还需要添加radio字样，并对同一组的radio设置同一个name。代码如下：
+<textarea class="code">
+<input type="radio" class="validate[required] radio" id="radio-1" 
+name="ra" value="radio-1" />
+<label for="radio-1">男</label>
+</textarea>
+<pre></pre>	
+	
+	如果是checkbox类型的元素，在class中添加了验证规则后，还需要添加checkbox字样，并对同一组的checkbox设置同一个name
+<textarea class="code">
+<input type="checkbox" id="checkbox-1" class="validate[minCheckbox[1]] checkbox" 
+name="ck1" value="选项1"/><label for="checkbox-1" >唱歌</label>
+</textarea>
+<pre></pre>	
+
+
+另外对于radio和checkbox会在其父容器出现红色边框。所以为了美观，可以使用一个div将其包含进去，并设置div的宽度，让红色边框对齐。<br /><br />
+	
+	如果是select（单选）类型的元素，只有当选择了value=""的option时会提示验证。多选select不需要value=""的option。
+
+	</div>
+	
+	<div class="box2" panelWidth="800" panelTitle="验证规则" roller="true">
+		<table class="tableStyle">
+			<tr>
+				<th width="20%">验证规则</th><th>规则说明</th>
+			</tr>
+			<tr>
+				<td>required</td>
+				<td>必填项</td>
+			</tr>
+			<tr>
+				<td>length[0,20]</td>
+				<td>限制长度</td>
+			</tr>
+			<tr>
+				<td>minCheckbox[1]</td>
+				<td>允许最少选中的checkbox的数量，括号中代表的是数量</td>
+			</tr>
+			<tr>
+				<td>maxCheckbox[3]</td>
+				<td>允许最多选中的checkbox的数量，括号中代表的是数量</td>
+			</tr>
+			<tr>
+				<td>confirm[pwd]</td>
+				<td>需要与某个元素的值保持一致，例如用于确认密码。括号中代表那个元素的id</td>
+			</tr>
+			<tr>
+				<td>custom[chinese]</td>
+				<td>只允许中文</td>
+			</tr>
+			<tr>
+				<td>custom[telephone]</td>
+				<td>只允许按固定电话号码格式填写，如010-51613333</td>
+			</tr>
+			<tr>
+				<td>custom[mobilephone]</td>
+				<td>只允许按手机号码格式填写</td>
+			</tr>
+			<tr>
+				<td>custom[email]</td>
+				<td>只允许按电子邮件格式填写</td>
+			</tr>
+			<tr>
+				<td>custom[date]</td>
+				<td>只允许按日期格式填写，如2010-8-14</td>
+			</tr>
+			<tr>
+				<td>custom[ip]</td>
+				<td>只允许按IP地址格式填写</td>
+			</tr>
+			<tr>
+				<td>custom[onlyNumber]</td>
+				<td>只允许输入数字</td>
+			</tr>
+			<tr>
+				<td>custom[onlyLetter]</td>
+				<td>只允许输入英文</td>
+			</tr>
+			<tr>
+				<td>custom[noSpecialCaracters]</td>
+				<td>只允许输入英文或数字</td>
+			</tr>
+			
+		</table>
+	</div>
+	
+	<div class="box2" panelWidth="800" panelTitle="自定义验证" roller="true">
+	自定义验证使用方法：<br />
+	1、使用funcCall在表单元素上添加自定义的验证规则名字，如class="validate[funcCall[custom1]]"，其中custom1为自定义的规则名<br />
+	2、在jquery.validationEngine-cn.js中添加该规则，代码如下：
+<textarea class="code">
+"custom1":{
+	"nname":"customFunc1",
+	"alertText":"* 必须输入123"
+}
+</textarea>
+<pre></pre>	
+	其中nname指定的customFunc1代表判断验证条件的函数，alertText为提示信息。<br />
+	3、在页面写函数customFunc1进行条件判断，不符合规则的话让该函数返回true，这样就出现提示了。
+	</div>
+	
+	<div class="box2" panelWidth="800" panelTitle="手动触发验证" roller="true">
+	表单验证默认会在提交表单时触发验证，有时候会遇到点击某个按钮或图片来验证或只验证整个表单的一部分元素。<br />
+	那么可以对要验证的元素所在的容器调用validationEngine方法。代码如下：
+<textarea class="code">
+var access=true;
+access=$('#myform').validationEngine({returnIsValid:true})
+if(access==true){
+	//此处放置验证通过后的处理语句，如提交表单、弹出提示或进行下一步操作等
+}
+</textarea>
+<pre></pre>	
+	
+	</div>
+	
+			
+</body>
+<!--代码高亮start-->
+<script type="text/javascript" src="../hl/highlight.js"></script>
+<script type="text/javascript" src="../hl/lang-xml.js"></script>
+<script type="text/javascript" src="../hl/lang-html.js"></script>
+<link href="../hl/style.css" rel="stylesheet" type="text/css"/>
+<script>
+	$(function(){
+			showCode()
+	})
+	function showCode(){
+		$(".code").each(function(){
+			var code =$(this).val()
+			var hl = new DlHighlight({lang: "html",lineNumbers :false });
+			var formatted = hl.doItNow(code);
+			$(this).next().addClass("DlHighlight").html("<pre>" + formatted + "</pre>")
+		})
+	}
+</script>
+<!--代码高亮end-->
+</html>

@@ -1,0 +1,137 @@
+package ${codeModel.controllerPackage};
+
+import cn.hd.common.page.PageBean;
+import ${codeModel.entityPackage}.${codeModel.className};
+import ${codeModel.packageName}.${codeModel.className}Service;
+import cn.hd.utils.ResponseJSON;
+import org.apache.log4j.Logger;
+import org.springframework.aop.framework.AopContext;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.Map;
+
+@Controller
+@RequestMapping("${codeModel.classInstName}Controller")
+public class ${codeModel.className}Controller extends BaseController{
+protected Logger log = Logger.getLogger(this.getClass().getName());
+@Autowired
+private ${codeModel.className}Service ${codeModel.classInstName}Service;
+
+/**
+* 新增业务
+* @param localIspCustomer
+* @return
+*/
+@RequestMapping(value = "save${codeModel.classInstName}")
+@ResponseBody
+public ResponseJSON save${codeModel.classInstName}(${codeModel.className} ${codeModel.classInstName}, HttpServletRequest request) throws Exception{
+log.debug("。。。。。。。。。。。。。新增业务。。。。。。。。。。。。。");
+ResponseJSON responseJSON = new ResponseJSON();
+try{
+responseJSON = ${codeModel.classInstName}Service.save${codeModel.className}(${codeModel.classInstName});
+}catch (Exception e) {
+e.printStackTrace();
+responseJSON.setSuccess(Boolean.FALSE);
+responseJSON.setMsg("保存失败!");
+}finally {
+/* 日志控制信息:日志控制不需要和业务事物同步 */
+((BaseController)AopContext.currentProxy()).addLog(responseJSON.getT_xt_rz());
+};
+return responseJSON;
+}
+/**
+* 修改业务
+* @param ${codeModel.classInstName}
+* @return
+*/
+@RequestMapping(value = "update${codeModel.className}")
+@ResponseBody
+public ResponseJSON update${codeModel.className}(${codeModel.className} ${codeModel.classInstName}, HttpServletRequest request) throws Exception{
+log.debug("。。。。。。。。。。。。。修改业务。。。。。。。。。。。。。");
+ResponseJSON responseJSON = new ResponseJSON();
+try{
+responseJSON = ${codeModel.classInstName}Service.update${codeModel.className}(${codeModel.classInstName});
+}catch (Exception e) {
+e.printStackTrace();
+responseJSON.setSuccess(Boolean.FALSE);
+responseJSON.setMsg("修改失败!");
+}finally {
+/* 日志控制信息:日志控制不需要和业务事物同步 */
+((BaseController)AopContext.currentProxy()).addLog(responseJSON.getT_xt_rz());
+};
+return responseJSON;
+}
+/**
+* 删除业务
+* @param ${codeModel.classInstName}
+* @return
+*/
+@RequestMapping(value = "del${codeModel.className}")
+@ResponseBody
+public ResponseJSON delLocalIspCustomer(${codeModel.className} ${codeModel.classInstName}, HttpServletRequest request) throws Exception{
+log.debug("。。。。。。。。。。。。。删除业务。。。。。。。。。。。。。");
+ResponseJSON responseJSON = new ResponseJSON();
+try{
+responseJSON = ${codeModel.classInstName}Service.del${codeModel.className}(${codeModel.classInstName});
+}catch (Exception e) {
+e.printStackTrace();
+responseJSON.setSuccess(Boolean.FALSE);
+responseJSON.setMsg("删除失败!");
+}finally {
+/* 日志控制信息:日志控制不需要和业务事物同步 */
+((BaseController)AopContext.currentProxy()).addLog(responseJSON.getT_xt_rz());
+};
+return responseJSON;
+}
+/**
+* 分页查询列表
+* @param ${codeModel.classInstName}
+* @return
+*/
+@RequestMapping(value = "queryPageList")
+@ResponseBody
+public Map<String,Object> queryPageList(${codeModel.className} ${codeModel.classInstName}, HttpServletRequest request, PageBean<LocalIspCustomer> pageBean) throws Exception{
+    log.debug("。。。。。。。。。。。。。分页查询列表。。。。。。。。。。。。。");
+    ResponseJSON responseJSON = new ResponseJSON();
+    try{
+    Map<String,Object> paramMap = new HashMap<String,Object>();/****分页参数*****/
+    responseJSON = ${codeModel.classInstName}Service.queryPageList(paramMap,pageBean.getPageNo(),pageBean.getPageSize());
+    }catch (Exception e) {
+    e.printStackTrace();
+    responseJSON.setSuccess(Boolean.FALSE);
+    responseJSON.setMsg("查询失败!");
+    }finally {
+    /* 日志控制信息:日志控制不需要和业务事物同步 */
+    ((BaseController)AopContext.currentProxy()).addLog(responseJSON.getT_xt_rz());
+    };
+    return (Map)responseJSON.getResult();
+    }
+    /**
+    * 查询所有数据列表
+    * @param ${codeModel.classInstName}
+    * @return
+    */
+    @RequestMapping(value = "queryList")
+    @ResponseBody
+    public Map<String,Object> queryList(${codeModel.className} ${codeModel.classInstName}, HttpServletRequest request) throws Exception{
+    log.debug("。。。。。。。。。。。。。查询所有数据列表。。。。。。。。。。。。。");
+    ResponseJSON responseJSON = new ResponseJSON();
+    try{
+    Map<String,Object> paramMap = new HashMap<String,Object>();/****分页参数*****/
+    responseJSON = ${codeModel.classInstName}Service.queryList(paramMap);
+    }catch (Exception e) {
+    e.printStackTrace();
+    responseJSON.setSuccess(Boolean.FALSE);
+    responseJSON.setMsg("查询失败!");
+    }finally {
+    /* 日志控制信息:日志控制不需要和业务事物同步 */
+    ((BaseController)AopContext.currentProxy()).addLog(responseJSON.getT_xt_rz());
+    };
+    return (Map)responseJSON.getResult();
+    }
+    }

@@ -1,0 +1,17 @@
+package ${codeModel.daoPackage}.impl;
+
+
+import cn.hd.common.util.BasicImplDao;
+import ${codeModel.entityPackage}.${codeModel.className};
+import ${codeModel.daoPackage}.${codeModel.className}Dao;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Repository;
+
+/**
+* 动态生成持久层  $!{codeModel.tableComment}
+*/
+@Repository
+@Qualifier("${codeModel.classInstName}Dao")
+public class ${codeModel.className}DaoImpl extends BasicImplDao<${codeModel.className}> implements ${codeModel.className}Dao {
+
+}

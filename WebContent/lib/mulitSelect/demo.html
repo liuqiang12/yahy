@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="../jquery-1.4.js"></script>
+<!--双向选择器（分离版）start-->
+<link href="skins/darkYellow/style.css" rel="stylesheet" type="text/css" id="compStyle"/>
+<script type="text/javascript" src="js/lister_split.js"></script>
+<!--双向选择器（分离版）end-->
+<script>
+    $(document).ready(function(){
+        $("#listA").lister("listB");
+    });
+    function getSelValue(){
+        var msg="";
+        msg=$('#listA').lister('listB').getList();
+        if(msg==""){
+            msg="无选择"
+        }
+        alert(msg);
+    }
+    function selectAll(){
+        $('#listA').lister('listB').sendAll(true);
+    }
+    function cancelAll(){
+        $('#listA').lister('listB').sendAll(false);
+    }
+</script>
+<style>
+	ul.lister{
+		height:250px;
+	}
+	div.listerLinksLeft,div.listerLinksRight{
+		text-align:left;
+		width:240px;
+		padding:5px;
+	}
+	.listBtn{
+		padding:100px 0 0 0;
+		float:left;
+	}
+</style>
+<body>
+<div>
+	<ul id="listA">
+		<li el="1">新增图片</li>
+		<li el="2">维护图片</li>
+		<li el="3">新增新闻</li>
+		<li el="4">发起投票活动</li>
+		<li el="5">更新相册</li>
+		<li el="6">新增用户</li>
+		<li el="7">用户列表</li>
+		<li el="8">权限维护</li>
+		<li el="9">轨迹日志</li>
+		<li el="10">天气预报</li>
+		<li el="11">论坛维护</li>
+		<li el="12">留言维护</li>
+	</ul>
+	<div class="listBtn">
+		<input type="button" value="全选>>" onclick="selectAll()"/><br /><br />
+		<input type="button" value="<<还原" onclick="cancelAll()"/>
+	</div>
+	<ul id="listB"></ul>
+</div>
+<div class="clear"></div>
+<input type="button" value="获取所选项的值" onclick="getSelValue()"/>
+</body>
+</html>
